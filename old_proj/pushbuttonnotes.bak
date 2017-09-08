@@ -1,0 +1,79 @@
+#include <RPio.h>
+#include <midi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <time.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#define THRDS 1
+
+
+void *thrd(void *arg);
+int exit_key=0;
+
+int main (void) {
+	char prmt;
+	int therr; 
+	int t=0;
+	void *status;
+	pthread_t thread[THRDS];
+	pthread_attr_t attr;
+	GpioInit();
+	midi_uart_init();
+        SETFUNC(11,INPUT);
+	SETEVENT(11,IO_RIS);
+       	SETEVENT(11,IO_FAL);
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+	if(therr = pthread_create(thread, NULL, thrd,  NULL)){
+          printf("ERROR CODE FOR THREAD 0 = %d\n",therr);
+	  exit(-1);
+	}
+	pthread_attr_destroy(&attr);
+	printf("press q to quit\n");
+        while (getchar() != 'q');
+	exit_key=1;
+	pthread_join(*thread, &status);
+	midi_uart_close();
+	pthread_exit(NULL);
+	return 0;
+}
+
+void *thrd(void *arg) {
+	char vel,oct,note = 0x00;
+	int last, now = 0;
+        while(exit_key == 0) {
+	  if(CHKEVN(11)) {
+	   now = 1;
+	   if(now != last) {
+	    if(CHKPIN(11)) {
+		vel = 64;
+		if(note<0x0C)
+		 note++;
+		else{
+		 note = 0x00;
+		 if(oct<0x0B)
+	          oct++;
+		}	   
+	    }
+	    else  
+		vel = 0;
+	   } 
+            if(NOTE(note,oct)==DATA_MSK) 
+        	note = oct = 0x00;
+	    CLREVN(11);
+	  }
+	  else last = now = 0;
+         if(now != last) {
+	     midi_write(NOTE_ON,(char)0,NOTE(note,oct),vel);
+	     usleep(9999);
+	 }
+	last = now;
+	}
+	pthread_exit((void*) 0);
+}
+

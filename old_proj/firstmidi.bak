@@ -1,0 +1,56 @@
+#include <RPio.h>
+#include <midi.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <sys/mman.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#define KEY 0x3C
+#define VEL 0x64
+void *thrd0(void *arg);
+
+int exit_key=0;
+
+pthread_mutex_t mu, mess_mu;
+
+int main (void) {
+	char prmt;
+	int therr; 
+	int t=0;
+	pthread_t thread[1];
+	GpioInit();
+	SETFUNC(3,INPUT);
+	midi_uart_init();
+	printf("press q to quit\n");
+
+
+        while ((prmt=getchar()) != 'q') {
+	   if(prmt == 'r')  {	
+	     printf("note on\n");
+	     midi_write((char)NOTE_ON,(char)0,(char)KEY, (char)VEL);
+	   } 
+	   else if(prmt == 't') {
+	     printf("note off\n");
+	     midi_write((char)NOTE_ON,(char)0,(char)KEY, (char)0);
+           }
+	   else
+	     printf("error\n");
+
+	}	
+        pthread_mutex_lock(&mu);
+	exit_key=1;
+	pthread_mutex_unlock(&mu);
+	pthread_mutex_destroy(&mu);
+	midi_uart_close();
+	printf("end o prog");
+	return(0);
+	pthread_exit(NULL);
+}
+
+void *thrd0(void *arg) {
+	pthread_exit((void*) 0);
+}
+
