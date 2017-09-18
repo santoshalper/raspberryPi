@@ -10,8 +10,8 @@
 #include <unistd.h>
 #define THRDS 2
 #define COLN 8
-#define ROWN 4
-#define SETN 4 //7 final
+#define ROWN 2
+#define SETN 6 //7 final
 //chord types
 #define MAJ	0	
 #define MIN 	1
@@ -36,8 +36,8 @@ int chordtype = MAJ;
 	
 char prmt='d';
 int colpin[COLN] = {27, 4, 16, 12, 7, 10, 23, 18};
-int rowpin[ROWN] = {17, 22, 9, 11};
-int settingpin[SETN] = {0, 1, 2, 3};
+int rowpin[ROWN] = {17, 22};
+int settingpin[SETN] = {0, 1, 2, 3, 9  11};
 	
 pthread_mutex_t exit_mu, key_mu, oct_mu;
 
@@ -142,13 +142,13 @@ void *keypress(void *arg) {
                 inv = 0;
 		for(r=0;r<SETN;r++) {
 		  if(!CHKPIN(settingpin[r])) {
-		     chordtype = r%2;
-		     inv =(int) r/2;
+                     inv = (r+1)%3;
+		     chordtype = (r+1)/3;
 		     break;
 		   }
 		}
 		CLREVN(rowpin[r]);
-		while(!(CHKEVN(rowpin[0])||CHKEVN(rowpin[1])||CHKEVN(rowpin[2])||CHKEVN(rowpin[3])));
+		while(!(CHKEVN(rowpin[0])||CHKEVN(rowpin[1])));
 	     }
 	     else {
 	        on = 0;
