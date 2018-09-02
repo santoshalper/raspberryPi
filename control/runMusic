@@ -1,0 +1,32 @@
+#!/bin/bash
+if [ -z $1 ]
+then 
+echo "need file for Qmidiarp"
+exit -1
+fi
+
+prog=0
+
+qmidiarp -a "$1" & 
+PID="$!"
+sleep 1
+aconnect 20:0 14:0
+aconnect 14:0 20:0
+aconnect 14:0 129:0
+aconnect 129:1 20:0
+sleep 1
+
+while [ $prog -lt 1 ];do
+  read -p"SET TEMPO " val
+  ./control -o14:0 -t75 
+  read -p"quit " val2
+  if [ val2 == 'q' ];then 
+    let prog=1
+  fi
+done
+
+aconnect -d 20:0 14:0
+aconnect -d 14:0 20:0
+aconnect -d 14:0 129:0
+aconnect -d 129:1 20:0
+kill "$PID"
