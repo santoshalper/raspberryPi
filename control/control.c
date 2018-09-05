@@ -9,6 +9,7 @@
 #include <getopt.h>
 #include <string.h>
 #include <alsa/asoundlib.h>
+#include <curses.h>
 
 
 #define MIDI_PROGRAM 0
@@ -315,11 +316,8 @@ int main(int argc, char *argv[])
 {
 	int npfd, j;
 	struct pollfd *pfd;
+        char key=0x00;
 
-
-	printf("amaster - MIDI ALSA Master CLock Via Sequencer\n");
-	printf("press s to start,then q to stop\n");
-        while(getchar() != 's');
 	if (parse_options(argc, argv) != 0) {
 		usage();
 		return EXIT_FAILURE;
@@ -337,6 +335,14 @@ int main(int argc, char *argv[])
 			return EXIT_FAILURE;
 		}
 	}
+	printf("amaster - MIDI ALSA Master CLock Via Sequencer\n");
+	printf("press s to start,then q to stop\n");
+        while(getchar() != 's');
+	initscr();
+	cbreak();
+	noecho();
+	scrollok(stdscr, TRUE);
+	nodelay(stdscr,TRUE);
 
 	signal(SIGINT, sigterm_exit);
 	signal(SIGTERM, sigterm_exit);
@@ -352,14 +358,17 @@ int main(int argc, char *argv[])
 	set_tempo(bpm);
 	start_queue();
 	pattern();
-	while (getchar() != 'q') {
+
+	while (key != 'q') {
 		if (poll(pfd, npfd, 1000) > 0) {
 			for (j = 0; j < npfd; j++) {
 				if (pfd[j].revents > 0)
 					midi_action();
 			}
 		}
+        	key = getch();
 	}
+	endwin();
         stop_clock(0);
 	return 0;
 }

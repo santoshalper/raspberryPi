@@ -12,21 +12,21 @@ PID="$!"
 sleep 1
 aconnect 20:0 14:0
 aconnect 14:0 20:0
-aconnect 14:0 129:0
-aconnect 129:1 20:0
+aconnect 14:0 128:0
+aconnect 128:1 20:0
 sleep 1
 
 while [ $prog -lt 1 ];do
   read -p"SET TEMPO " val
-  ./control -o14:0 -t75 
+  ./control -o14:0 -t$val
   read -p"quit " val2
-  if [ val2 == 'q' ];then 
+  if [ "$val2" = 'y' ];then 
     let prog=1
   fi
 done
 
 aconnect -d 20:0 14:0
 aconnect -d 14:0 20:0
-aconnect -d 14:0 129:0
-aconnect -d 129:1 20:0
+aconnect -d 14:0 128:0
+aconnect -d 128:1 20:0
 kill "$PID"
