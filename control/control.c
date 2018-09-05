@@ -10,10 +10,12 @@
 #include <string.h>
 #include <alsa/asoundlib.h>
 #include <curses.h>
-
+#define MIDI_CHANNEL 9
 
 #define MIDI_PROGRAM 0
 #define TICKS_PER_QUARTER 120
+#define TIME_SIGNATURE_NUM 4
+#define TIME_SIGNATURE_FIG 4
 #define BPM 100
 #define FALSE 0
 #define TRUE  1
@@ -22,8 +24,12 @@ char *port_address;
 snd_seq_t *seq_handle;
 int queue_id, port_in_id, port_out_id;
 
+int measure = 0;
 int bpm = BPM;
 int resolution = TICKS_PER_QUARTER;
+int channel = MIDI_CHANNEL;
+int num_parts = TIME_SIGNATURE_NUM;
+int part_fig = TIME_SIGNATURE_FIG;
 int first = TRUE;
 
 void usage()
@@ -166,6 +172,16 @@ void continue_queue()
  *
  */
 
+void make_CC(unsigned char note, int tick)
+{
+	snd_seq_event_t ev;
+	snd_seq_ev_clear(&ev);
+	snd_seq_ev_set_note(&ev, channel, note, velocity, 1);
+	snd_seq_ev_schedule_tick(&ev, queue_id, 1, tick);
+	snd_seq_ev_set_source(&ev, port_out_id);
+	snd_seq_ev_set_subs(&ev);
+	snd_seq_event_output_direct(seq_handle, &ev);
+}
 void make_echo(int tick)
 {
 	snd_seq_event_t ev;
@@ -221,7 +237,13 @@ void pattern()
 	for (tick = 0; tick < (resolution * 4); tick += duration) {
 		make_clock(tick);
 	}
+	tick = 0;
+	duration = resolution * 4 / part_fig;
+	for (j = 0; j < num_parts; j++) {
+		tick += duration;
+	}
 	make_echo(tick);
+	printf("measure: %5d\r", ++measure);
         
 }
 
@@ -339,8 +361,6 @@ int main(int argc, char *argv[])
 	printf("press s to start,then q to stop\n");
         while(getchar() != 's');
 	initscr();
-	cbreak();
-	noecho();
 	scrollok(stdscr, TRUE);
 	nodelay(stdscr,TRUE);
 
