@@ -11,6 +11,7 @@
 #include <alsa/asoundlib.h>
 #include <curses.h>
 #define MIDI_CHANNEL 9
+@define CONTROL 0x2A
 
 #define MIDI_PROGRAM 0
 #define TICKS_PER_QUARTER 120
@@ -28,6 +29,8 @@ int measure = 0;
 int bpm = BPM;
 int resolution = TICKS_PER_QUARTER;
 int channel = MIDI_CHANNEL;
+char controlM = CONTROL;
+
 int num_parts = TIME_SIGNATURE_NUM;
 int part_fig = TIME_SIGNATURE_FIG;
 int first = TRUE;
@@ -172,11 +175,11 @@ void continue_queue()
  *
  */
 
-void make_CC(unsigned char note, int tick)
+void make_CC(unsigned char mess, unsigned char data, int tick)
 {
 	snd_seq_event_t ev;
 	snd_seq_ev_clear(&ev);
-	snd_seq_ev_set_note(&ev, channel, note, velocity, 1);
+	snd_seq_ev_set_controller(&ev, channel, mess, data);
 	snd_seq_ev_schedule_tick(&ev, queue_id, 1, tick);
 	snd_seq_ev_set_source(&ev, port_out_id);
 	snd_seq_ev_set_subs(&ev);
@@ -243,7 +246,7 @@ void pattern()
 		tick += duration;
 	}
 	make_echo(tick);
-	printf("measure: %5d\r", ++measure);
+	printw("measure: %5d\r", ++measure);
         
 }
 
@@ -361,6 +364,8 @@ int main(int argc, char *argv[])
 	printf("press s to start,then q to stop\n");
         while(getchar() != 's');
 	initscr();
+	cbreak();
+	noecho();
 	scrollok(stdscr, TRUE);
 	nodelay(stdscr,TRUE);
 
