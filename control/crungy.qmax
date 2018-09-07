@@ -241,7 +241,14 @@
     <globalstorage>
         <timeMode>0</timeMode>
         <switchAtBeat>0</switchAtBeat>
-        <timeModule>1</timeModule>
-        <midiControllers/>
+        <timeModule>0</timeModule>
+        <midiControllers>
+            <MIDICC CtrlID="0">
+                <ccnumber>89</ccnumber>
+                <channel>15</channel>
+                <min>0</min>
+                <max>127</max>
+            </MIDICC>
+        </midiControllers>
     </globalstorage>
 </session>
