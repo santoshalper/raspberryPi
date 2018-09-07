@@ -11,7 +11,7 @@
 #include <alsa/asoundlib.h>
 #include <curses.h>
 #define MIDI_CHANNEL 9
-@define CONTROL 0x2A
+#define CONTROL 0x59
 
 #define MIDI_PROGRAM 0
 #define TICKS_PER_QUARTER 120
@@ -29,20 +29,31 @@ int measure = 0;
 int bpm = BPM;
 int resolution = TICKS_PER_QUARTER;
 int channel = MIDI_CHANNEL;
-char controlM = CONTROL;
 
 int num_parts = TIME_SIGNATURE_NUM;
 int part_fig = TIME_SIGNATURE_FIG;
 int first = TRUE;
 
+FILE *songraw;
+struct section {
+	int bar;
+	int tempo;
+	int arp;
+}
+struct section song[256];
+int songend=0;
+int songlth=0;
+       	
+
 void usage()
 {
 	printf(
 	        "Usage: \n"
-		"  control [-o|--output CLIENT:PORT] [-r|--resolution PPQ] [-t|--tempo BPM]\n"
+		"  control [-o|--output CLIENT:PORT] [-r|--resolution PPQ] [-t|--tempo BPM] [-s|--song file]\\n"
 		"\n"
 		"Options:\n"
 		"  -h, --help         This message\n"
+		"  -s, --song         song file for control program\n"
 		"  -o, --output       Pair of CLIENT:PORT, as ALSA numbers or names\n"
 		"  -r, --resolution   Tick resolution per quarter note (PPQ), default 120\n"
 		"  -t, --tempo        Speed, in BPM, default 100\n");
@@ -246,7 +257,8 @@ void pattern()
 		tick += duration;
 	}
 	make_echo(tick);
-	printw("measure: %5d\r", ++measure);
+	printw("measure: %5d\r", measure);
+	measure++;
         
 }
 
@@ -302,6 +314,7 @@ int parse_options(int argc, char *argv[])
 	int option_index = 0;
 	struct option long_options[] = {
 		{"help",        0, 0, 'h'},
+		{"song",        1, 0, 's'},
 		{"output",      1, 0, 'o'},
 		{"resolution",  1, 0, 'r'},
 		{"tempo",       1, 0, 't'},
@@ -309,12 +322,15 @@ int parse_options(int argc, char *argv[])
 	};
 
 	while (1) {
-		c = getopt_long(argc, argv, "c:g:hmMo:p:qr:s:St:v:w:",
+		c = getopt_long(argc, argv, "ho:r:s:t:",
 				long_options, &option_index);
 		if (c == -1)
 			break;
 
 		switch (c) {
+		case 's':
+			songraw=fopen(optarg,"r");
+			break;
 		case 'o':
 			port_address = optarg;
 			break;
@@ -339,10 +355,9 @@ int parse_options(int argc, char *argv[])
 
 int main(int argc, char *argv[])
 {
-	int npfd, j;
+	int npfd, j, i;
 	struct pollfd *pfd;
         char key=0x00;
-
 	if (parse_options(argc, argv) != 0) {
 		usage();
 		return EXIT_FAILURE;
@@ -360,6 +375,17 @@ int main(int argc, char *argv[])
 			return EXIT_FAILURE;
 		}
 	}
+
+	for(i=0; i<256; i++) {
+	   songlth=i+1;	
+	   if(fscanf(songraw,"%d %d %d", &song[i].bar, &song[i].tempo, &song[i].arp) != 3) {
+	      songend = song[i].bar;
+	      printf("%d\n",songend);
+	      break;
+	   }
+	   printf("%d %d %d\n", song[i].bar, song[i].tempo, song[i].arp);
+	}
+
 	printf("amaster - MIDI ALSA Master CLock Via Sequencer\n");
 	printf("press s to start,then q to stop\n");
         while(getchar() != 's');
