@@ -1,4 +1,5 @@
 /*
+
   MASTER MIDI MASTER 
                    gcc -o control -lasound control.c
 */
@@ -10,7 +11,7 @@
 #include <string.h>
 #include <alsa/asoundlib.h>
 #include <curses.h>
-#define MIDI_CHANNEL 9
+#define MIDI_CHANNEL 15
 #define CONTROL 0x59
 
 #define MIDI_PROGRAM 0
@@ -39,24 +40,25 @@ struct section {
 	int bar;
 	int tempo;
 	int arp;
-}
+};
 struct section song[256];
 int songend=0;
 int songlth=0;
+int sect, trans;
+
        	
 
 void usage()
 {
 	printf(
 	        "Usage: \n"
-		"  control [-o|--output CLIENT:PORT] [-r|--resolution PPQ] [-t|--tempo BPM] [-s|--song file]\\n"
+		"  control [-o|--output CLIENT:PORT] [-r|--resolution PPQ] [-s|--song file]\\n"
 		"\n"
 		"Options:\n"
 		"  -h, --help         This message\n"
 		"  -s, --song         song file for control program\n"
 		"  -o, --output       Pair of CLIENT:PORT, as ALSA numbers or names\n"
-		"  -r, --resolution   Tick resolution per quarter note (PPQ), default 120\n"
-		"  -t, --tempo        Speed, in BPM, default 100\n");
+		"  -r, --resolution   Tick resolution per quarter note (PPQ), default 120\n");
 }
 
 void open_sequencer()
@@ -244,6 +246,8 @@ void pattern()
 	int j, tick, duration;
 	
         if(first) {
+	        sect=1;
+		trans=song[sect].bar;
 	        start_clock(tick);
                 first = FALSE;
          }
@@ -252,13 +256,20 @@ void pattern()
 		make_clock(tick);
 	}
 	tick = 0;
+	if (measure == trans) {
+	    make_CC(CONTROL,song[sect].arp,tick);
+	    sect++;
+	    trans = song[sect].bar;
+	}
 	duration = resolution * 4 / part_fig;
 	for (j = 0; j < num_parts; j++) {
+		
 		tick += duration;
 	}
 	make_echo(tick);
-	printw("measure: %5d\r", measure);
-	measure++;
+        measure++;
+  	printw("section change at measure: %5d\n",trans);
+	printw("measure: %5d\n", measure);
         
 }
 
@@ -317,7 +328,6 @@ int parse_options(int argc, char *argv[])
 		{"song",        1, 0, 's'},
 		{"output",      1, 0, 'o'},
 		{"resolution",  1, 0, 'r'},
-		{"tempo",       1, 0, 't'},
 		{0, 0, 0, 0}
 	};
 
@@ -337,11 +347,6 @@ int parse_options(int argc, char *argv[])
 		case 'r':
 			resolution = atoi(optarg);
 			if (check_range(resolution, 48, 480, "resolution"))
-				return 1;
-			break;
-		case 't':
-			bpm = atoi(optarg);
-			if (check_range(bpm, 16, 240, "tempo"))
 				return 1;
 			break;
 		case 0:
@@ -377,14 +382,13 @@ int main(int argc, char *argv[])
 	}
 
 	for(i=0; i<256; i++) {
-	   songlth=i+1;	
 	   if(fscanf(songraw,"%d %d %d", &song[i].bar, &song[i].tempo, &song[i].arp) != 3) {
 	      songend = song[i].bar;
-	      printf("%d\n",songend);
 	      break;
 	   }
-	   printf("%d %d %d\n", song[i].bar, song[i].tempo, song[i].arp);
 	}
+	
+	fclose(songraw);
 
 	printf("amaster - MIDI ALSA Master CLock Via Sequencer\n");
 	printf("press s to start,then q to stop\n");
@@ -406,11 +410,12 @@ int main(int argc, char *argv[])
 	pfd = (struct pollfd *) alloca(npfd * sizeof(struct pollfd));
 	snd_seq_poll_descriptors(seq_handle, pfd, npfd, POLLIN);
 
+	bpm = song[0].tempo;
 	set_tempo(bpm);
 	start_queue();
 	pattern();
 
-	while (key != 'q') {
+	while ((key != 'q') && (measure <= songend)) {
 		if (poll(pfd, npfd, 1000) > 0) {
 			for (j = 0; j < npfd; j++) {
 				if (pfd[j].revents > 0)

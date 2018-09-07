@@ -1,11 +1,9 @@
 CC=gcc
 CFLAGS=-lasound -lcurses
 
-OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
-
-
 control: 
-	$(CC) -o$@ $^ $(CFLAGS) $@.c
+	$(CC) -o control $(CFLAGS) control.c
+
 
 
 
