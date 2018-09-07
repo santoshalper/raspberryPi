@@ -11,8 +11,8 @@
 #include <string.h>
 #include <alsa/asoundlib.h>
 #include <curses.h>
-#define MIDI_CHANNEL 15
-#define CONTROL 0x59
+#define MIDI_CHANNEL 7
+#define CONTROL 0x58
 
 #define MIDI_PROGRAM 0
 #define TICKS_PER_QUARTER 120
@@ -44,7 +44,7 @@ struct section {
 struct section song[256];
 int songend=0;
 int songlth=0;
-int sect, trans;
+int sect=1;
 
        	
 
@@ -244,10 +244,7 @@ void stop_clock(int tick)
 void pattern()
 {
 	int j, tick, duration;
-	
         if(first) {
-	        sect=1;
-		trans=song[sect].bar;
 	        start_clock(tick);
                 first = FALSE;
          }
@@ -256,21 +253,16 @@ void pattern()
 		make_clock(tick);
 	}
 	tick = 0;
-	if (measure == trans) {
-	    make_CC(CONTROL,song[sect].arp,tick);
-	    sect++;
-	    trans = song[sect].bar;
-	}
 	duration = resolution * 4 / part_fig;
-	for (j = 0; j < num_parts; j++) {
-		
-		tick += duration;
+	for(j = 0; j < num_parts; j++) {
+      	   if(measure == song[sect].bar) {
+	 	make_CC(CONTROL,song[sect].arp,tick);
+		sect++;
+	    }
+	    tick += duration;
 	}
 	make_echo(tick);
-        measure++;
-  	printw("section change at measure: %5d\n",trans);
-	printw("measure: %5d\n", measure);
-        
+	printw("measure: %5d\r", ++measure);
 }
 
 void midi_action()
