@@ -22,7 +22,7 @@
             <pattern>
                 <pattern>&gt;&gt;012</pattern>
                 <repeatMode>0</repeatMode>
-                <triggerMode>1</triggerMode>
+                <triggerMode>2</triggerMode>
                 <latchMode>1</latchMode>
             </pattern>
             <input>
@@ -33,7 +33,7 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>1</muted>
+                <muted>0</muted>
                 <port>0</port>
                 <channel>1</channel>
             </output>
@@ -141,7 +141,7 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <port>0</port>
                 <channel>2</channel>
             </output>
