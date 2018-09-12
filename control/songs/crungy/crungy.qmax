@@ -128,7 +128,7 @@
         </Arp>
         <Arp name="bridge">
             <pattern>
-                <pattern>&gt;&gt;012+010-21</pattern>
+                <pattern>&gt;&gt;+10-21012+0</pattern>
                 <repeatMode>0</repeatMode>
                 <triggerMode>0</triggerMode>
                 <latchMode>1</latchMode>
@@ -186,7 +186,7 @@
                     <rndTick>0</rndTick>
                     <rndLen>0</rndLen>
                     <rndVel>0</rndVel>
-                    <pattern>&gt;&gt;012+010-21</pattern>
+                    <pattern>&gt;&gt;+10-21012+0</pattern>
                     <muteMask>
                         <data></data>
                     </muteMask>
@@ -224,7 +224,7 @@
                     <rndTick>0</rndTick>
                     <rndLen>0</rndLen>
                     <rndVel>0</rndVel>
-                    <pattern>&gt;&gt;012+010-21</pattern>
+                    <pattern>&gt;&gt;+10-21012+0</pattern>
                     <muteMask>
                         <data></data>
                     </muteMask>
