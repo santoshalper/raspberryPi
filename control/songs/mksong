@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo mkdir $1
+sudo cp default/*.song $1/$1.song
+sudo cp default/*.qmax $1/$1.qmax

@@ -16,6 +16,8 @@ aconnect 14:0 128:0
 aconnect 128:1 20:0
 sleep 1
 
+wmctrl -r QMidiArp -b add,above
+
 while [ $prog -lt 1 ];do
   ./control -o14:0 -s"$1".song
   read -p"quit " val2
