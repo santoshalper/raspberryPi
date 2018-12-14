@@ -5,7 +5,7 @@
         <tempo>100</tempo>
         <settings>
             <midiControlEnabled>1</midiControlEnabled>
-            <midiClockEnabled>0</midiClockEnabled>
+            <midiClockEnabled>1</midiClockEnabled>
             <jackSyncEnabled>0</jackSyncEnabled>
             <forwardUnmatched>0</forwardUnmatched>
             <forwardPort>0</forwardPort>
