@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE qmidiarpSession>
-<session version="0.6.4" name="whoopmyass">
+<session version="0.6.4" name="speakswhale">
     <global>
-        <tempo>100</tempo>
+        <tempo>80</tempo>
         <settings>
             <midiControlEnabled>1</midiControlEnabled>
             <midiClockEnabled>1</midiClockEnabled>
@@ -16,16 +16,14 @@
             <length>0</length>
             <midiControllers/>
         </groove>
+        <midiControllers/>
     </global>
     <modules>
-        <Arp name="1">
-            <pattern>
-                <pattern>&gt;&gt;+210-2</pattern>
-                <repeatMode>0</repeatMode>
-                <triggerMode>2</triggerMode>
-                <latchMode>1</latchMode>
-            </pattern>
+        <Arp name="1" inOutVisible="1">
             <input>
+                <restartByKbd>0</restartByKbd>
+                <trigByKbd>1</trigByKbd>
+                <trigLegato>0</trigLegato>
                 <channel>0</channel>
                 <indexMin>0</indexMin>
                 <indexMax>127</indexMax>
@@ -34,9 +32,20 @@
             </input>
             <output>
                 <muted>0</muted>
+                <defer>0</defer>
                 <port>0</port>
                 <channel>1</channel>
             </output>
+            <midiControllers/>
+            <globalStores/>
+            <pattern>
+                <pattern>&gt;&gt;+210-2</pattern>
+                <repeatMode>0</repeatMode>
+                <octaveMode>0</octaveMode>
+                <octaveLow>0</octaveLow>
+                <octaveHigh>0</octaveHigh>
+                <latchMode>1</latchMode>
+            </pattern>
             <random>
                 <tick>0</tick>
                 <velocity>0</velocity>
@@ -46,12 +55,10 @@
                 <attack>0</attack>
                 <release>0</release>
             </envelope>
-            <midiControllers/>
-            <globalStores/>
         </Arp>
     </modules>
     <GUI>
-        <windowState>000000ff00000000fd00000002000000020000040000000184fc0100000004fb00000012006c006f006700570069006400670065007401000000000000013f0000013d00fffffffc00000145000002bb0000022b00fffffffa000000000200000002fb0000000a004100720070003a00310100000000ffffffff0000015800fffffffb0000000a004100720070003a003201000000310000015c0000015800fffffffb0000000a005300650071003a003102000000000000003100000358000001c3fc00000000000003ad0000000000fffffffa000000000100000001fb0000000a004c0046004f003a00310100000000ffffffff00000000000000000000000300000400000000d6fc0100000002fb0000001800670072006f006f007600650057006900640067006500740200000000000000000000015f000000a4fb000000120067006c006f006200530074006f007200650100000000000004000000011e00ffffff000004000000001700000004000000040000000800000008fc0000000100000002000000020000001600660069006c00650054006f006f006c0042006100720100000000ffffffff00000000000000000000001c0063006f006e00740072006f006c0054006f006f006c0042006100720100000094ffffffff0000000000000000</windowState>
+        <windowState>000000ff00000000fd00000002000000020000037200000158fc0100000004fb00000012006c006f006700570069006400670065007401000000000000013d0000013d00fffffffc000001430000022f0000022b00fffffffa000000000200000002fb0000000a004100720070003a00310100000000ffffffff0000015800fffffffb0000000a004100720070003a003201000000310000015c0000000000000000fb0000000a005300650071003a003102000000000000003100000358000001c3fc00000000000003ad0000000000fffffffa000000000100000001fb0000000a004c0046004f003a00310100000000ffffffff00000000000000000000000300000372000000a4fc0100000002fb0000001800670072006f006f007600650057006900640067006500740200000000000000000000015f000000a4fb000000120067006c006f006200530074006f00720065010000000000000372000000bd00ffffff000003720000000400000004000000040000000800000008fc0000000100000002000000020000001600660069006c00650054006f006f006c0042006100720100000000ffffffff00000000000000000000001c0063006f006e00740072006f006c0054006f006f006c0042006100720100000094ffffffff0000000000000000</windowState>
     </GUI>
     <globalstorage>
         <timeMode>0</timeMode>
