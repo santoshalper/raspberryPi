@@ -66,8 +66,8 @@
         <timeModule>0</timeModule>
         <midiControllers>
             <MIDICC CtrlID="0">
-                <ccnumber>89</ccnumber>
-                <channel>1</channel>
+                <ccnumber>88</ccnumber>
+                <channel>7</channel>
                 <min>0</min>
                 <max>127</max>
             </MIDICC>
