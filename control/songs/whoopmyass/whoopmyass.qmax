@@ -121,7 +121,14 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
+	    <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>89</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
@@ -199,7 +206,14 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>90</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
@@ -277,8 +291,15 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
-            <globalStores>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>91</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+           <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
                     <muteOut>0</muteOut>
@@ -355,8 +376,15 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
-            <globalStores>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>92</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+           <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
                     <muteOut>0</muteOut>
@@ -433,8 +461,15 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
-            <globalStores>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>93</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+           <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
                     <muteOut>0</muteOut>
@@ -511,8 +546,15 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
-            <globalStores>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>94</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+           <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
                     <muteOut>0</muteOut>
@@ -589,8 +631,15 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
-            <globalStores>
+            <midiControllers>
+                 <MIDICC CtrlID="0">
+                    <ccnumber>95</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+           <globalStores>
                 <parStore ID="0">
                     <empty>1</empty>
                     <muteOut>0</muteOut>
