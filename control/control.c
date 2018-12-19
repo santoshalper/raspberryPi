@@ -21,6 +21,7 @@
 #define BPM 100
 #define FALSE 0
 #define TRUE  1
+#define ARPS 8
 
 char *port_address;
 snd_seq_t *seq_handle;
@@ -39,7 +40,7 @@ FILE *songraw;
 struct section {
 	int bar;
 	int tempo;
-	int arp;
+	int arp[ARPS];
 };
 struct section song[256];
 int songend=0;
@@ -243,7 +244,7 @@ void stop_clock(int tick)
 }
 void pattern()
 {
-	int j, tick, duration;
+	int j, k, tick, duration;
         if(first) {
 	        start_clock(tick);
                 first = FALSE;
@@ -256,7 +257,8 @@ void pattern()
 	duration = resolution * 4 / part_fig;
 	for(j = 0; j < num_parts; j++) {
       	   if(measure == song[sect].bar) {
-	 	make_CC(CONTROL,song[sect].arp,tick);
+		for(k = 0; k < ARPS; k++)    
+	 	   make_CC(CONTROL+k,song[sect].arp[k],tick);
 		sect++;
 	    }
 	    tick += duration;
@@ -372,10 +374,14 @@ int main(int argc, char *argv[])
 			return EXIT_FAILURE;
 		}
 	}
-
 	for(i=0; i<256; i++) {
-	   if(fscanf(songraw,"%d %d %d", &song[i].bar, &song[i].tempo, &song[i].arp) != 3) {
+	   if(fscanf(songraw,"%d %d %d %d %d %d %d %d %d %d",
+	                     &song[i].bar, &song[i].tempo, &song[i].arp[0],
+	                     &song[i].arp[1], &song[i].arp[2], &song[i].arp[3],
+	                     &song[i].arp[4], &song[i].arp[5], &song[i].arp[6], &song[i].arp[7])
+	      < 2) {   
 	      songend = song[i].bar;
+	      printf("%d",songend);
 	      break;
 	   }
 	}
