@@ -257,8 +257,14 @@ void pattern()
 	duration = resolution * 4 / part_fig;
 	for(j = 0; j < num_parts; j++) {
       	   if(measure == song[sect].bar) {
-		for(k = 0; k < ARPS; k++)    
-	 	   make_CC(CONTROL+k,song[sect].arp[k],tick);
+	        make_CC(CONTROL+0,song[sect].arp[0],tick);
+		make_CC(CONTROL+1,song[sect].arp[1],tick);
+		make_CC(CONTROL+2,song[sect].arp[2],tick);
+		make_CC(CONTROL+3,song[sect].arp[3],tick);
+		make_CC(CONTROL+4,song[sect].arp[4],tick);
+		make_CC(CONTROL+5,song[sect].arp[5],tick);
+		make_CC(CONTROL+6,song[sect].arp[6],tick);
+		make_CC(CONTROL+7,song[sect].arp[7],tick);
 		sect++;
 	    }
 	    tick += duration;
@@ -381,7 +387,6 @@ int main(int argc, char *argv[])
 	                     &song[i].arp[4], &song[i].arp[5], &song[i].arp[6], &song[i].arp[7])
 	      < 2) {   
 	      songend = song[i].bar;
-	      printf("%d",songend);
 	      break;
 	   }
 	}
