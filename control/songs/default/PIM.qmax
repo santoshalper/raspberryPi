@@ -27,6 +27,9 @@
                 <latchMode>1</latchMode>
             </pattern>
             <input>
+                <restartByKbd>0</restartByKbd>
+                <trigByKbd>1</trigByKbd>
+                <trigLegato>0</trigLegato>
                 <channel>0</channel>
                 <indexMin>0</indexMin>
                 <indexMax>127</indexMax>
@@ -35,9 +38,18 @@
             </input>
             <output>
                 <muted>0</muted>
+                <defer>0</defer>
                 <port>0</port>
                 <channel>1</channel>
             </output>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>88</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <random>
                 <tick>0</tick>
                 <velocity>0</velocity>
@@ -56,13 +68,6 @@
         <timeMode>0</timeMode>
         <switchAtBeat>0</switchAtBeat>
         <timeModule>0</timeModule>
-        <midiControllers>
-            <MIDICC CtrlID="0">
-                <ccnumber>88</ccnumber>
-                <channel>7</channel>
-                <min>0</min>
-                <max>127</max>
-            </MIDICC>
-        </midiControllers>
+        <midiControllers/>
     </globalstorage>
 </session>
