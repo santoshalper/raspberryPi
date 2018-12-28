@@ -12,8 +12,8 @@ PID="$!"
 sleep 1
 aconnect 20:0 14:0
 aconnect 14:0 20:0
-aconnect 14:0 129:0
-aconnect 129:1 20:0
+aconnect 14:0 qmidiarp:0
+aconnect qmidiarp:1 20:0
 sleep 1
 
 
@@ -27,6 +27,6 @@ done
 
 aconnect -d 20:0 14:0
 aconnect -d 14:0 20:0
-aconnect -d 14:0 129:0
-aconnect -d 129:1 20:0
+aconnect -d 14:0 qmidiarp:0
+aconnect -d qmidiarp:1 20:0
 kill "$PID"
