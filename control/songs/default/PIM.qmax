@@ -31,10 +31,10 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>1</channel>
+                <channel>4</channel>
             </output>
             <midiControllers>
                 <MIDICC CtrlID="0">
@@ -75,12 +75,19 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>5</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>89</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -112,12 +119,19 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>5</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>90</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -140,7 +154,7 @@
         <Arp name="4" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
-                <trigByKbd>0</trigByKbd>
+                <trigByKbd>1</trigByKbd>
                 <trigLegato>0</trigLegato>
                 <channel>0</channel>
                 <indexMin>0</indexMin>
@@ -149,12 +163,19 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>6</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>91</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -186,12 +207,19 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>6</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>92</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -223,12 +251,19 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>6</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>93</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -264,8 +299,14 @@
                 <defer>0</defer>
                 <port>0</port>
                 <channel>0</channel>
-            </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>94</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
@@ -302,7 +343,14 @@
                 <port>0</port>
                 <channel>0</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>95</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
                 <pattern></pattern>
