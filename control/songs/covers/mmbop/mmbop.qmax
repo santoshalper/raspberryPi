@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE qmidiarpSession>
-<session version="0.6.4" name="PIM">
+<session version="0.6.4" name="mmbop">
     <global>
-        <tempo>100</tempo>
+        <tempo>92</tempo>
         <settings>
             <midiControlEnabled>1</midiControlEnabled>
             <midiClockEnabled>1</midiClockEnabled>
@@ -19,10 +19,10 @@
         <midiControllers/>
     </global>
     <modules>
-        <Arp name="1" inOutVisible="1">
+        <Arp name="chr" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
-                <trigByKbd>1</trigByKbd>
+                <trigByKbd>0</trigByKbd>
                 <trigLegato>0</trigLegato>
                 <channel>0</channel>
                 <indexMin>0</indexMin>
@@ -34,7 +34,7 @@
                 <muted>0</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>1</channel>
+                <channel>3</channel>
             </output>
             <midiControllers>
                 <MIDICC CtrlID="0">
@@ -46,7 +46,7 @@
             </midiControllers>
             <globalStores/>
             <pattern>
-                <pattern>&gt;&gt;012</pattern>
+                <pattern>&gt;0210</pattern>
                 <repeatMode>0</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
@@ -63,7 +63,7 @@
                 <release>0</release>
             </envelope>
         </Arp>
-        <Arp name="2" inOutVisible="1">
+        <Arp name="chrh1" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
                 <trigByKbd>0</trigByKbd>
@@ -75,20 +75,27 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>3</channel>
             </output>
-            <midiControllers/>
+             <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>89</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
-                <pattern></pattern>
+                <pattern>&gt;1+0-21</pattern>
                 <repeatMode>1</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
                 <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
+                <latchMode>1</latchMode>
             </pattern>
             <random>
                 <tick>0</tick>
@@ -100,7 +107,7 @@
                 <release>0</release>
             </envelope>
         </Arp>
-        <Arp name="3" inOutVisible="1">
+        <Arp name="chrh2" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
                 <trigByKbd>0</trigByKbd>
@@ -112,20 +119,27 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>3</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>90</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
-                <pattern></pattern>
+                <pattern>&gt;2+10-2</pattern>
                 <repeatMode>1</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
                 <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
+                <latchMode>1</latchMode>
             </pattern>
             <random>
                 <tick>0</tick>
@@ -137,7 +151,45 @@
                 <release>0</release>
             </envelope>
         </Arp>
-        <Arp name="4" inOutVisible="1">
+        <LFO name="mod" inOutVisible="1">
+            <input>
+                <enableNoteOff>0</enableNoteOff>
+                <restartByKbd>0</restartByKbd>
+                <trigByKbd>0</trigByKbd>
+                <trigLegato>0</trigLegato>
+                <channel>0</channel>
+                <indexMin>0</indexMin>
+                <indexMax>127</indexMax>
+                <rangeMin>0</rangeMin>
+                <rangeMax>127</rangeMax>
+                <ccnumber>74</ccnumber>
+            </input>
+            <output>
+                <muted>0</muted>
+                <defer>0</defer>
+                <port>0</port>
+                <channel>3</channel>
+                <ccnumber>1</ccnumber>
+            </output>
+            <midiControllers/>
+            <globalStores/>
+            <waveParams>
+                <loopmode>0</loopmode>
+                <waveform>0</waveform>
+                <frequency>6</frequency>
+                <resolution>6</resolution>
+                <size>3</size>
+                <amplitude>127</amplitude>
+                <offset>0</offset>
+            </waveParams>
+            <muteMask>
+                <data>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</data>
+            </muteMask>
+            <customWave>
+                <data>3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f</data>
+            </customWave>
+        </LFO>
+        <Arp name="shit" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
                 <trigByKbd>0</trigByKbd>
@@ -149,20 +201,27 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>4</channel>
             </output>
-            <midiControllers/>
-            <globalStores/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>91</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
+	    <globalStores/>
             <pattern>
-                <pattern></pattern>
+                <pattern>&gt;&gt;012+0</pattern>
                 <repeatMode>1</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
                 <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
+                <latchMode>1</latchMode>
             </pattern>
             <random>
                 <tick>0</tick>
@@ -174,7 +233,7 @@
                 <release>0</release>
             </envelope>
         </Arp>
-        <Arp name="5" inOutVisible="1">
+        <Arp name="shith1" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
                 <trigByKbd>0</trigByKbd>
@@ -186,20 +245,27 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>4</channel>
             </output>
-            <midiControllers/>
+	    <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>92</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
-                <pattern></pattern>
+                <pattern>&gt;&gt;12+01</pattern>
                 <repeatMode>1</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
                 <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
+                <latchMode>1</latchMode>
             </pattern>
             <random>
                 <tick>0</tick>
@@ -211,7 +277,7 @@
                 <release>0</release>
             </envelope>
         </Arp>
-        <Arp name="6" inOutVisible="1">
+        <Arp name="shith2" inOutVisible="1">
             <input>
                 <restartByKbd>0</restartByKbd>
                 <trigByKbd>0</trigByKbd>
@@ -223,94 +289,27 @@
                 <rangeMax>127</rangeMax>
             </input>
             <output>
-                <muted>0</muted>
+                <muted>1</muted>
                 <defer>0</defer>
                 <port>0</port>
-                <channel>0</channel>
+                <channel>4</channel>
             </output>
-            <midiControllers/>
+            <midiControllers>
+                <MIDICC CtrlID="0">
+                    <ccnumber>93</ccnumber>
+                    <channel>7</channel>
+                    <min>0</min>
+                    <max>1</max>
+                </MIDICC>
+            </midiControllers>
             <globalStores/>
             <pattern>
-                <pattern></pattern>
+                <pattern>&gt;&gt;2+012</pattern>
                 <repeatMode>1</repeatMode>
                 <octaveMode>0</octaveMode>
                 <octaveLow>0</octaveLow>
                 <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
-            </pattern>
-            <random>
-                <tick>0</tick>
-                <velocity>0</velocity>
-                <length>0</length>
-            </random>
-            <envelope>
-                <attack>0</attack>
-                <release>0</release>
-            </envelope>
-        </Arp>
-        <Arp name="7" inOutVisible="1">
-            <input>
-                <restartByKbd>0</restartByKbd>
-                <trigByKbd>0</trigByKbd>
-                <trigLegato>0</trigLegato>
-                <channel>0</channel>
-                <indexMin>0</indexMin>
-                <indexMax>127</indexMax>
-                <rangeMin>0</rangeMin>
-                <rangeMax>127</rangeMax>
-            </input>
-            <output>
-                <muted>0</muted>
-                <defer>0</defer>
-                <port>0</port>
-                <channel>0</channel>
-            </output>
-            <midiControllers/>
-            <globalStores/>
-            <pattern>
-                <pattern></pattern>
-                <repeatMode>1</repeatMode>
-                <octaveMode>0</octaveMode>
-                <octaveLow>0</octaveLow>
-                <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
-            </pattern>
-            <random>
-                <tick>0</tick>
-                <velocity>0</velocity>
-                <length>0</length>
-            </random>
-            <envelope>
-                <attack>0</attack>
-                <release>0</release>
-            </envelope>
-        </Arp>
-        <Arp name="8" inOutVisible="1">
-            <input>
-                <restartByKbd>0</restartByKbd>
-                <trigByKbd>0</trigByKbd>
-                <trigLegato>0</trigLegato>
-                <channel>0</channel>
-                <indexMin>0</indexMin>
-                <indexMax>127</indexMax>
-                <rangeMin>0</rangeMin>
-                <rangeMax>127</rangeMax>
-            </input>
-            <output>
-                <muted>0</muted>
-                <defer>0</defer>
-                <port>0</port>
-                <channel>0</channel>
-            </output>
-            <midiControllers/>
-            <globalStores/>
-            <pattern>
-                <pattern></pattern>
-                <repeatMode>1</repeatMode>
-                <octaveMode>0</octaveMode>
-                <octaveLow>0</octaveLow>
-                <octaveHigh>0</octaveHigh>
-                <latchMode>0</latchMode>
+                <latchMode>1</latchMode>
             </pattern>
             <random>
                 <tick>0</tick>
@@ -324,7 +323,7 @@
         </Arp>
     </modules>
     <GUI>
-        <windowState>000000ff00000000fd0000000200000002000004a400000176fc0100000004fb00000012006c006f00670057006900640067006500740100000000000001ac0000013d00fffffffc000001b2000002f20000022b00fffffffa000000040100000009fb0000000a004100720070003a00310100000000ffffffff0000022b00fffffffb0000000a004100720070003a00320100000000ffffffff0000022b00fffffffb0000000a004100720070003a00330100000000ffffffff0000022b00fffffffb0000000a004100720070003a00340100000000ffffffff0000022b00fffffffb0000000a004100720070003a00350100000000ffffffff0000022b00fffffffb0000000a004100720070003a00350100000000ffffffff0000000000000000fb0000000a004100720070003a00360100000000ffffffff0000022b00fffffffb0000000a004100720070003a00370100000000ffffffff0000022b00fffffffb0000000a004100720070003a00380100000000ffffffff0000022b00fffffffb0000000a005300650071003a003102000000000000003100000358000001c3fc00000000000003ad0000000000fffffffa000000000100000001fb0000000a004c0046004f003a00310100000000ffffffff000000000000000000000003000004a4000000a4fc0100000002fb0000001800670072006f006f007600650057006900640067006500740200000000000000000000015f000000a4fb000000120067006c006f006200530074006f007200650100000000000004a4000001ce00ffffff000004a4000000fc00000004000000040000000800000008fc0000000100000002000000020000001600660069006c00650054006f006f006c0042006100720100000000ffffffff00000000000000000000001c0063006f006e00740072006f006c0054006f006f006c0042006100720100000094ffffffff0000000000000000</windowState>
+        <windowState>000000ff00000000fd0000000200000002000005c1000001c5fc0100000004fb00000012006c006f00670057006900640067006500740100000000000002040000013d00fffffffc0000020a000003b70000024500fffffffa000000080200000009fb0000000e004100720070003a0063006800720100000000ffffffff0000015800fffffffb0000000a004100720070003a00310100000000ffffffff0000000000000000fb0000000a004100720070003a003201000000310000015c0000000000000000fb00000012004100720070003a006300680072006800310100000000ffffffff0000015800fffffffb00000012004100720070003a006300680072006800320100000000ffffffff0000015800fffffffb0000000e004c0046004f003a006d006f00640100000000ffffffff000001a700fffffffb00000010004100720070003a00730068006900740100000000ffffffff0000015800fffffffb00000014004100720070003a0073006800690074006800310100000000ffffffff0000015800fffffffb00000014004100720070003a0073006800690074006800320100000000ffffffff0000015800fffffffb0000000a005300650071003a003102000000000000003100000358000001c3fc00000000000003ad0000000000fffffffa000000000100000001fb0000000a004c0046004f003a00310100000000ffffffff000000000000000000000003000005c1000000a4fc0100000002fb0000001800670072006f006f007600650057006900640067006500740200000000000000000000015f000000a4fb000000120067006c006f006200530074006f007200650100000000000005c10000019e00ffffff000005c10000000000000004000000040000000800000008fc0000000100000002000000020000001600660069006c00650054006f006f006c0042006100720100000000ffffffff00000000000000000000001c0063006f006e00740072006f006c0054006f006f006c0042006100720100000094ffffffff0000000000000000</windowState>
     </GUI>
     <globalstorage>
         <timeMode>0</timeMode>
